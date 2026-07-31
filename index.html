@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Center Image</title>
-    <style>
-        body{
-            text-align: center;
-        }
-    </style>
+<style>
+.cover img{
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+    transition: 1s;
+}
+
+.cover img:hover{
+    transform: rotate(360deg);
+}
+</style>
 </head>
 <body>
 
-    <img src="nenulocal.jpg" alt="Nenu Local Movie" width="300"><br>
-<audio src="music.mp3" controls></audio>
+<div class="cover">
+    <img src="nenulocal.jpg" alt="Cover Image">
+</div>
 
 </body>
 </html>
