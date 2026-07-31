@@ -1,28 +1,144 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>NENU LOCAL</title>
+
 <style>
+
+body{
+    margin:0;
+    background:black;
+    text-align:center;
+    color:white;
+    font-family:Arial,sans-serif;
+}
+
+.cover{
+    position:relative;
+    width:100%;
+    overflow:hidden;
+}
+
 .cover img{
-    width: 100%;
-    height: 500px;
-    object-fit: cover;
-    display: block;
-    transition: 1s;
+    width:100%;
+    height:500px;
+    object-fit:cover;
+    display:block;
+    transition:1s;
 }
 
 .cover img:hover{
-    transform: rotate(360deg);
+    transform:rotate(360deg);
 }
+
+/* Moving Text */
+.name{
+    position:absolute;
+    top:50%;
+    left:-100%;
+    font-size:55px;
+    font-weight:bold;
+    color:white;
+    text-shadow:3px 3px 10px red;
+    animation:
+        scroll 8s linear infinite,
+        float 2s ease-in-out infinite;
+}
+
+@keyframes scroll{
+    from{
+        left:-100%;
+    }
+    to{
+        left:100%;
+    }
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(-10px);
+    }
+
+    50%{
+        transform:translateY(10px);
+    }
+
+    100%{
+        transform:translateY(-10px);
+    }
+}
+
+audio{
+    margin-top:20px;
+}
+
+video{
+    margin-top:20px;
+    border-radius:10px;
+}
+
 </style>
+
 </head>
+
 <body>
 
 <div class="cover">
-    <img src="nenulocal.jpg" alt="Cover Image"><br>
- <audio controls>
-        <source src="music.mp3" type="audio/mpeg">
-    </audio><br>
-<video src="Next.mp4" controls width="500"></video></div>
+
+<img src="nenulocal.jpg" alt="Cover">
+
+<div class="name">NENU LOCAL</div>
+
+</div>
+
+<br>
+
+<audio controls>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<br><br>
+
+<video controls width="700">
+<source src="Next.mp4" type="video/mp4">
+</video>
+
+<!-- Confetti Library -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+<script>
+
+window.onload=function(){
+
+var duration=5000;
+var end=Date.now()+duration;
+
+var interval=setInterval(function(){
+
+if(Date.now()>end){
+clearInterval(interval);
+return;
+}
+
+confetti({
+
+particleCount:100,
+spread:360,
+startVelocity:50,
+ticks:300,
+
+origin:{
+x:Math.random(),
+y:Math.random()-0.2
+}
+
+});
+
+},250);
+
+};
+
+</script>
 
 </body>
 </html>
