@@ -5,76 +5,128 @@
 
 <style>
 
-body{
-    margin:0;
-    background:black;
-    text-align:center;
-    color:white;
-    font-family:Arial,sans-serif;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
+body{
+background:black;
+color:white;
+font-family:Arial,sans-serif;
+text-align:center;
+overflow-x:hidden;
+}
+
+/* Welcome Screen */
+
+#welcome{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:55px;
+font-weight:bold;
+color:gold;
+z-index:9999;
+animation:hideScreen 3s forwards;
+}
+
+@keyframes hideScreen{
+
+0%{opacity:1;}
+
+80%{opacity:1;}
+
+100%{
+opacity:0;
+visibility:hidden;
+}
+
+}
+
+/* Cover */
+
 .cover{
-    position:relative;
-    width:100%;
-    overflow:hidden;
+position:relative;
+overflow:hidden;
 }
 
 .cover img{
-    width:100%;
-    height:500px;
-    object-fit:cover;
-    display:block;
-    transition:1s;
+width:100%;
+height:500px;
+object-fit:cover;
 }
 
-.cover img:hover{
-    transform:rotate(360deg);
-}
+/* Moving Title */
 
-/* Moving Text */
 .name{
-    position:absolute;
-    top:50%;
-    left:-100%;
-    font-size:55px;
-    font-weight:bold;
-    color:white;
-    text-shadow:3px 3px 10px red;
-    animation:
-        scroll 8s linear infinite,
-        float 2s ease-in-out infinite;
+position:absolute;
+top:50%;
+left:-100%;
+font-size:60px;
+font-weight:bold;
+color:white;
+text-shadow:0 0 20px red;
+animation:
+move 8s linear infinite,
+float 2s ease-in-out infinite,
+glow 1s infinite alternate;
 }
 
-@keyframes scroll{
-    from{
-        left:-100%;
-    }
-    to{
-        left:100%;
-    }
+@keyframes move{
+
+from{
+left:-100%;
+}
+
+to{
+left:100%;
+}
+
 }
 
 @keyframes float{
-    0%{
-        transform:translateY(-10px);
-    }
 
-    50%{
-        transform:translateY(10px);
-    }
+0%{
+transform:translateY(-10px);
+}
 
-    100%{
-        transform:translateY(-10px);
-    }
+50%{
+transform:translateY(10px);
+}
+
+100%{
+transform:translateY(-10px);
+}
+
+}
+
+@keyframes glow{
+
+from{
+text-shadow:0 0 10px red;
+}
+
+to{
+text-shadow:0 0 40px yellow;
+}
+
 }
 
 audio{
-    margin-top:20px;
+margin-top:20px;
 }
 
 video{
-    margin-top:20px;
-    border-radius:10px;
+margin-top:20px;
+border-radius:15px;
 }
 
 </style>
@@ -83,17 +135,23 @@ video{
 
 <body>
 
+<div id="welcome">
+WELCOME TO NENU LOCAL
+</div>
+
 <div class="cover">
 
-<img src="nenulocal.jpg" alt="Cover">
+<img src="nenulocal.jpg">
 
-<div class="name">NENU LOCAL</div>
+<div class="name">
+NENU LOCAL
+</div>
 
 </div>
 
 <br>
 
-<audio controls>
+<audio id="music" controls loop>
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -103,40 +161,55 @@ video{
 <source src="Next.mp4" type="video/mp4">
 </video>
 
-<!-- Confetti Library -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
 <script>
 
+/* Confetti */
+
 window.onload=function(){
 
-var duration=5000;
-var end=Date.now()+duration;
+var end=Date.now()+5000;
 
-var interval=setInterval(function(){
+var timer=setInterval(function(){
 
 if(Date.now()>end){
-clearInterval(interval);
+
+clearInterval(timer);
+
 return;
+
 }
 
 confetti({
 
-particleCount:100,
+particleCount:120,
+
 spread:360,
-startVelocity:50,
-ticks:300,
+
+startVelocity:55,
 
 origin:{
+
 x:Math.random(),
+
 y:Math.random()-0.2
+
 }
 
 });
 
 },250);
 
-};
+}
+
+/* Auto Play Music after First Click */
+
+document.addEventListener("click",function(){
+
+document.getElementById("music").play();
+
+},{once:true});
 
 </script>
 
